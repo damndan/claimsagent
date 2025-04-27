@@ -10,11 +10,13 @@ export interface Claim {
   id: string;
   customerName: string;
   date: string;
-  status: 'New' | 'In Progress' | 'Completed' | 'Rejected';
+  status: 'New' | 'In Progress' | 'Completed' | 'Rejected' | 'Pending';
   description: string;
   mediaFiles: MediaFile[];
   summary: string;
   assessment: string;
   submitted: boolean;
   submittedAt?: string;
+  approvedAt?: string;
+  rejectedAt?: string;
 } 

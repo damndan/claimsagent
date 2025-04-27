@@ -586,15 +586,20 @@ const ClaimPage: React.FC = () => {
               {isGeneratingMedia ? 'Analyzing...' : 'Analyze Media'}
             </Button>
           </Box>
-          {mediaAssessment && (
-            <Card variant="outlined">
-              <CardContent>
-                <Typography variant="body1" style={{ whiteSpace: 'pre-line' }}>
-                  {mediaAssessment}
-                </Typography>
-              </CardContent>
-            </Card>
-          )}
+          <Card variant="outlined">
+            <CardContent>
+              <TextField
+                fullWidth
+                multiline
+                rows={10}
+                value={mediaAssessment}
+                onChange={(e) => setMediaAssessment(e.target.value)}
+                placeholder="Enter media analysis..."
+                variant="outlined"
+                disabled={claim?.submitted}
+              />
+            </CardContent>
+          </Card>
         </Paper>
 
         {/* Summary Assessment Section */}
@@ -610,15 +615,20 @@ const ClaimPage: React.FC = () => {
               {isGeneratingSummary ? 'Analyzing...' : 'Analyze Summary'}
             </Button>
           </Box>
-          {summaryAssessment && (
-            <Card variant="outlined">
-              <CardContent>
-                <Typography variant="body1" style={{ whiteSpace: 'pre-line' }}>
-                  {summaryAssessment}
-                </Typography>
-              </CardContent>
-            </Card>
-          )}
+          <Card variant="outlined">
+            <CardContent>
+              <TextField
+                fullWidth
+                multiline
+                rows={10}
+                value={summaryAssessment}
+                onChange={(e) => setSummaryAssessment(e.target.value)}
+                placeholder="Enter summary analysis..."
+                variant="outlined"
+                disabled={claim?.submitted}
+              />
+            </CardContent>
+          </Card>
         </Paper>
 
         {/* Comparable Accidents Section */}
@@ -655,13 +665,14 @@ const ClaimPage: React.FC = () => {
                       <Typography variant="subtitle1" gutterBottom>
                         Similar Front-End Collision
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" paragraph>
-                        • 2021 Honda Accord<br />
-                        • Similar impact point and damage pattern<br />
-                        • Repair cost: $4,200<br />
-                        • Settlement amount: $4,800<br />
-                        • Resolution time: 7 days
-                      </Typography>
+                      <TextField
+                        fullWidth
+                        multiline
+                        rows={4}
+                        defaultValue="• 2021 Honda Accord\n• Similar impact point and damage pattern\n• Repair cost: $4,200\n• Settlement amount: $4,800\n• Resolution time: 7 days"
+                        variant="outlined"
+                        disabled={claim?.submitted}
+                      />
                     </Box>
                   </Box>
                 </CardContent>
@@ -687,13 +698,14 @@ const ClaimPage: React.FC = () => {
                       <Typography variant="subtitle1" gutterBottom>
                         Similar Side Impact
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" paragraph>
-                        • 2020 Toyota Camry<br />
-                        • Comparable structural damage<br />
-                        • Repair cost: $5,100<br />
-                        • Settlement amount: $5,600<br />
-                        • Resolution time: 9 days
-                      </Typography>
+                      <TextField
+                        fullWidth
+                        multiline
+                        rows={4}
+                        defaultValue="• 2020 Toyota Camry\n• Comparable structural damage\n• Repair cost: $5,100\n• Settlement amount: $5,600\n• Resolution time: 9 days"
+                        variant="outlined"
+                        disabled={claim?.submitted}
+                      />
                     </Box>
                   </Box>
                 </CardContent>
@@ -719,13 +731,14 @@ const ClaimPage: React.FC = () => {
                       <Typography variant="subtitle1" gutterBottom>
                         Similar Rear-End Collision
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" paragraph>
-                        • 2019 Honda Civic<br />
-                        • Similar bumper and trunk damage<br />
-                        • Repair cost: $3,800<br />
-                        • Settlement amount: $4,200<br />
-                        • Resolution time: 6 days
-                      </Typography>
+                      <TextField
+                        fullWidth
+                        multiline
+                        rows={4}
+                        defaultValue="• 2019 Honda Civic\n• Similar bumper and trunk damage\n• Repair cost: $3,800\n• Settlement amount: $4,200\n• Resolution time: 6 days"
+                        variant="outlined"
+                        disabled={claim?.submitted}
+                      />
                     </Box>
                   </Box>
                 </CardContent>
@@ -751,9 +764,16 @@ const ClaimPage: React.FC = () => {
           {assessment && (
             <Card variant="outlined">
               <CardContent>
-                <Typography variant="body1" style={{ whiteSpace: 'pre-line' }}>
-                  {assessment}
-                </Typography>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={10}
+                  value={assessment}
+                  onChange={handleAssessmentChange}
+                  placeholder="Enter assessment..."
+                  variant="outlined"
+                  disabled={claim?.submitted}
+                />
               </CardContent>
             </Card>
           )}

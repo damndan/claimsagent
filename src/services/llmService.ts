@@ -16,7 +16,7 @@ if (!API_KEY) {
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-const generatePrompt = (type: 'media' | 'summary' | 'final', data: any) => {
+const generatePrompt = (type: 'media' | 'summary' | 'final' | 'quality', data: any) => {
   switch (type) {
     case 'media':
       return `Analyze these insurance claim media files: ${JSON.stringify(data.mediaFiles)}. 
@@ -43,6 +43,16 @@ Focus on:
 2. Damage severity
 3. Required actions
 4. Priority level`;
+
+    case 'quality':
+      return `Review the quality of this insurance claim assessment: ${data.assessment}
+Focus on:
+1. Completeness of analysis
+2. Accuracy of damage assessment
+3. Clarity of recommendations
+4. Consistency with evidence
+5. Professional tone and formatting
+6. Areas for improvement`;
   }
 };
 
@@ -249,6 +259,46 @@ Notes:
       console.error('Error generating final assessment:', error);
       return { 
         text: 'Error generating final assessment. Please try again later.',
+        error: error instanceof Error ? error.message : 'Unknown error'
+      };
+    }
+  },
+
+  async generateQualityReview(assessment: string): Promise<LLMResponse> {
+    try {
+      if (!assessment.trim()) {
+        throw new Error('No assessment provided');
+      }
+
+      return { 
+        text: `Quality Review:
+
+Assessment Quality: Good
+- Completeness: 8/10
+- Accuracy: 9/10
+- Clarity: 8/10
+- Professionalism: 9/10
+
+Strengths:
+1. Detailed damage description
+2. Clear cost estimates
+3. Well-structured timeline
+4. Professional tone
+5. Comprehensive documentation
+
+Areas for Improvement:
+1. Could include more specific repair recommendations
+2. Timeline estimates could be more detailed
+3. Consider adding alternative repair options
+4. Could benefit from more comparative analysis
+
+Overall Score: 8.5/10
+Recommendation: Assessment is of high quality and suitable for approval. Minor improvements could enhance the analysis further.`
+      };
+    } catch (error) {
+      console.error('Error generating quality review:', error);
+      return { 
+        text: 'Error generating quality review. Please try again later.',
         error: error instanceof Error ? error.message : 'Unknown error'
       };
     }
